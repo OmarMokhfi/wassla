@@ -1,17 +1,7 @@
-import { createEdgeRouter } from "next-connect";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import prisma from "src/lib/Prisma";
 import { hashPassword } from "src/services/password.service";
 import { generateToken } from "src/services/token.service";
-import { ROLE } from "src/types/roles";
-
-interface RequestContext {
-  params: {
-    id: string;
-  };
-}
-
-const router = createEdgeRouter<NextRequest, RequestContext>();
 
 const getUserWithPrivilage = (email: string) => {
   return new Promise(async (resolve, reject) => {
@@ -26,14 +16,9 @@ const getUserWithPrivilage = (email: string) => {
   });
 };
 
-router.post(async (req: NextRequest) => {
-  let { email, password, firstname, lastname, role } = {
-    email: "ob.mokhfi@gmail.com",
-    password: "Azerty123456",
-    role: ROLE.STUDENT,
-    firstname: "Omar",
-    lastname: "Mokhfi",
-  };
+export async function POST(request: any) {
+  const body = await request.json();
+  let { email, password, firstname, lastname, role } = body;
   const foundUser = await getUserWithPrivilage(email);
   if (foundUser) {
     return NextResponse.json({
@@ -43,7 +28,7 @@ router.post(async (req: NextRequest) => {
     });
   } else {
     try {
-      password = (await hashPassword(password)).toString();
+      password = await hashPassword(password);
       const user = await prisma.user.create({
         data: {
           email,
@@ -63,10 +48,4 @@ router.post(async (req: NextRequest) => {
       return NextResponse.json({ success: false, message: "server_error" });
     }
   }
-});
-
-export async function POST(request: NextRequest, ctx: RequestContext) {
-  return router.run(request, ctx);
 }
-
-export default router;

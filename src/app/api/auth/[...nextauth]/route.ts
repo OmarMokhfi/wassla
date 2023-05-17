@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import prisma from "src/lib/Prisma";
 import { comparePassword } from "src/services/password.service";
 import { User } from "src/types/Models";
-import { ROLE } from "src/types/roles";
+import { ROLE } from "src/types/Roles";
 
 const getUser = (email: string) => {
   return new Promise<User | null>(async (resolve, reject) => {

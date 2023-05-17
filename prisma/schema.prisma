@@ -11,10 +11,13 @@ datasource db {
 }
 
 model User {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  email     String @unique
-  role      String @default("STUDENT")
-  password  String
-  firstname String
-  lastname  String
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  email      String  @unique
+  role       String  @default("STUDENT")
+  password   String
+  firstname  String
+  lastname   String
+  university String
+  field      String
+  degree     String?
 }

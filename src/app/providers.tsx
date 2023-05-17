@@ -1,5 +1,6 @@
 "use client";
 
+import { ConfigProvider } from "antd";
 import { SessionProvider } from "next-auth/react";
 
 type Props = {
@@ -7,5 +8,17 @@ type Props = {
 };
 
 export const NextAuthProvider = ({ children }: Props) => {
-  return <SessionProvider>{children}</SessionProvider>;
+  return (
+    <SessionProvider>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#32B39E",
+          },
+        }}
+      >
+        {children}
+      </ConfigProvider>
+    </SessionProvider>
+  );
 };

@@ -1,5 +1,5 @@
-export enum ROLE {
-  STUDENT = "STUDENT",
-  TEACHER = "TEACHER",
-  CLUB = "CLUB",
-}
+export const ROLE = {
+  STUDENT: "STUDENT",
+  TEACHER: "TEACHER",
+  CLUB: "CLUB",
+};

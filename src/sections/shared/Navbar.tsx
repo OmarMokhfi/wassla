@@ -2,7 +2,7 @@
 
 import { Avatar } from "antd";
 import Link from "next/link";
-import { AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
 import WInput from "src/components/Input";
 
 export default function Navbar() {
@@ -51,7 +51,7 @@ export default function Navbar() {
               <Avatar
                 className="bg-white text-black cursor-pointer"
                 size={40}
-                icon={<AiOutlineUser />}
+                src={<img src="/profile.png" alt="avatar" />}
               />
             </div>
             <p className="my-0 text-xs text-white">Me</p>

@@ -1,6 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import WButton from "src/components/Button";
 import WModal from "src/components/Modal";
+import PostModal from "./PostModal";
+import SessionModal from "./SessionModal";
 
 export default function SharePost() {
   const handleOk = () => {
@@ -23,34 +26,37 @@ export default function SharePost() {
           />
         </div>
         <div className="space-y-2 flex-grow">
-          <WButton
-            type="default"
-            className="w-full text-left !text-[12px]"
-            size="large"
+          <WModal
+            title="Create a New Post"
+            handleOk={handleOk}
+            okLabel="Post"
+            trigger={
+              <WButton
+                type="default"
+                className="w-full text-left !text-[12px]"
+                size="large"
+              >
+                Share What's On Your Mind
+              </WButton>
+            }
           >
-            Share Your Mind
-          </WButton>
+            <PostModal />
+          </WModal>
 
           <div className="flex gap-4">
-            <WModal
-              title="Create Article"
-              handleOk={handleOk}
-              okLabel="Create Article"
-              trigger={
-                <WButton
-                  type="text"
-                  className="flex items-center justify-center gap-1"
-                >
-                  Write Article
-                </WButton>
-              }
-            >
-              <p>The modal will be closed after two seconds</p>
-            </WModal>
+            <Link href="/w/articles/new" className="no-underline">
+              <WButton
+                type="text"
+                className="flex items-center justify-center gap-1"
+              >
+                Write Article
+              </WButton>
+            </Link>
             <WModal
               title="Create Session"
               handleOk={handleOk}
               okLabel="Create Session"
+              centered
               trigger={
                 <WButton
                   type="text"
@@ -60,7 +66,7 @@ export default function SharePost() {
                 </WButton>
               }
             >
-              <p>The modal will be closed after two seconds</p>
+              <SessionModal />
             </WModal>
           </div>
         </div>

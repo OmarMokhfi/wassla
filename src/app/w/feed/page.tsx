@@ -50,7 +50,7 @@ export default function Page() {
           <div className="px-[30px] py-[20px] space-y-3">
             <div>
               <Link
-                href="/"
+                href="/w/articles"
                 className="no-underline text-gray-600 hover:text-primary"
               >
                 My Articles
@@ -58,7 +58,7 @@ export default function Page() {
             </div>
             <div>
               <Link
-                href="/"
+                href="/w/sessions"
                 className="no-underline text-gray-600 hover:text-primary"
               >
                 My Sessions

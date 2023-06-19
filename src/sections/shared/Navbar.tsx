@@ -34,7 +34,7 @@ export default function Navbar() {
               Home
             </Link>
             <Link
-              href="/"
+              href="/w/connect"
               className="text-white no-underline hover:text-red-500"
             >
               Teachers Connect
@@ -46,16 +46,21 @@ export default function Navbar() {
               Notifications
             </Link>
           </div>
-          <div className="flex flex-col items-center gap-1">
-            <div>
-              <Avatar
-                className="bg-white text-black cursor-pointer"
-                size={40}
-                src={<img src="/profile.png" alt="avatar" />}
-              />
+          <Link
+            href="/w/profile"
+            className="text-white no-underline hover:text-red-500"
+          >
+            <div className="flex flex-col items-center gap-1">
+              <div>
+                <Avatar
+                  className="bg-white text-black cursor-pointer"
+                  size={40}
+                  src={<img src="/profile.png" alt="avatar" />}
+                />
+              </div>
+              <p className="my-0 text-xs text-white">Me</p>
             </div>
-            <p className="my-0 text-xs text-white">Me</p>
-          </div>
+          </Link>
         </div>
       </div>
     </nav>

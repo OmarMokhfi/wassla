@@ -1,19 +1,152 @@
+"use client";
+
 import Image from "next/image";
-import { AiFillEdit } from "react-icons/ai";
+import { useState } from "react";
+import { AiFillEdit, AiOutlinePlus } from "react-icons/ai";
+import { BiEdit } from "react-icons/bi";
 import WButton from "src/components/Button";
+import WTextArea from "src/components/TextArea";
 
 export default function page() {
   return (
-    <div>
+    <div className="space-y-6 w-full max-w-[1176px] mx-auto">
       <Cover
         name="Omar Mokhfi"
         role="Dr. A L'École Supérieure en Informatique, Sidi Bel Abbès"
         location="Sidi bel abbes - Algeria"
         followers={1250}
       />
+      <About content="Innovative and business-oriented Front End Developer with 3 years of professional experience building and maintaining responsive web applications. Proficient in HTML5, CSS, Javascript, Angular and React. Passionate about design systems, and development architectures to produce the cleanest, scalable code. Enjoying my time with 3D modeling and Adobe products from design to video editing as a hobby." />
+      <Experience />
     </div>
   );
 }
+
+const Head = ({
+  title,
+  children,
+}: {
+  title: string;
+  children?: React.ReactNode;
+}) => {
+  return (
+    <div className="py-6 px-10 flex items-center justify-between">
+      <h2 className="font-bold mb-0 relative">
+        {title}{" "}
+        <div className="absolute -right-[20px] top-1/2 -translate-y-1/2 w-[10px] h-[10px] bg-primary rounded-full"></div>
+      </h2>
+      {children}
+    </div>
+  );
+};
+
+const About = ({ content }: { content: string }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  return (
+    <div className="bg-white shadow-sm rounded-lg overflow-hidden pb-4">
+      <Head title="About">
+        <div>
+          <WButton
+            type="text"
+            icon={<BiEdit size={24} />}
+            className="flex items-center justify-center"
+            onClick={() => setIsEditing(true)}
+          />
+        </div>
+      </Head>
+      <div className="px-10">
+        {isEditing ? (
+          <>
+            <WTextArea
+              placeholder="A bio about yourself"
+              value={content}
+              style={{ height: 120, resize: "none" }}
+            />
+            <div className="flex items-center justify-end gap-4 mt-3">
+              <WButton type="default" onClick={() => setIsEditing(false)}>
+                Cancel
+              </WButton>
+              <WButton type="primary" loading={isSaving}>
+                Save
+              </WButton>
+            </div>
+          </>
+        ) : (
+          <p>{content}</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Experience = () => {
+  const experiences = [
+    {
+      role: "University Researcher",
+      university: "Djillali Liabes University · Part-time",
+      date: "Mar 2014 - Mar 2020 · 6 yrs 1 mo",
+      location: "Sidi Bel Abbes - Algeria",
+    },
+    {
+      role: "University Researcher",
+      university: "Djillali Liabes University · Part-time",
+      date: "Mar 2014 - Mar 2020 · 6 yrs 1 mo",
+      location: "Sidi Bel Abbes - Algeria",
+    },
+    {
+      role: "University Researcher",
+      university: "Djillali Liabes University · Part-time",
+      date: "Mar 2014 - Mar 2020 · 6 yrs 1 mo",
+      location: "Sidi Bel Abbes - Algeria",
+    },
+  ];
+  return (
+    <div className="bg-white shadow-sm rounded-lg overflow-hidden pb-4">
+      <Head title="Experience">
+        <div>
+          <WButton
+            type="text"
+            icon={<AiOutlinePlus size={24} />}
+            className="flex items-center justify-center"
+          />
+        </div>
+      </Head>
+      <div className="mt-6 px-10">
+        {experiences.map((item, index) => (
+          <>
+            {index != 0 && <hr className="mb-6 opacity-60" />}
+            <div className="flex group">
+              <div className="w-full flex gap-3">
+                <div className="min-h-[60px] min-w-[60px] h-[60px] w-[60px] relative overflow-hidden">
+                  <Image
+                    src="/profile.png"
+                    alt=""
+                    fill
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+                <div>
+                  <p className="font-bold mb-2">{item.role}</p>
+                  <p className="mb-2">{item.university}</p>
+                  <p className="mb-2">{item.date}</p>
+                  <p className="">{item.location}</p>
+                </div>
+              </div>
+              <div className="hidden group-hover:block">
+                <WButton
+                  type="text"
+                  icon={<BiEdit size={24} />}
+                  className="flex items-center justify-center"
+                />
+              </div>
+            </div>
+          </>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const Cover = ({
   name,

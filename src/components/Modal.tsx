@@ -1,3 +1,5 @@
+"use client";
+
 import { Modal } from "antd";
 import { useState } from "react";
 import WButton from "./Button";

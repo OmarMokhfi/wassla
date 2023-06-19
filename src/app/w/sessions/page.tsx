@@ -1,15 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import {
   AiFillCaretDown,
   AiOutlinePlus,
   AiOutlineShareAlt,
 } from "react-icons/ai";
 import WButton from "src/components/Button";
+import WModal from "src/components/Modal";
+import SessionModal from "src/sections/feed/SessionModal";
 
-const articles = [
+const sessions = [
   {
     title: "Introduction to HTML and CSS",
     description:
@@ -53,22 +54,30 @@ export default function page() {
   return (
     <>
       <div className="w-full max-w-[1176px] mx-auto mb-6 py-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="font-bold mb-0">Latest Articles</h1>
-        <Link href="/w/articles/new" className="no-underline">
-          <WButton
-            type="primary"
-            className="flex items-center justify-center gap-1 text-white"
-            icon={<AiOutlinePlus size={16} />}
-            size="large"
-          >
-            Create Article
-          </WButton>
-        </Link>
+        <h1 className="font-bold mb-0">Sessions</h1>
+        <WModal
+          title="Create Session"
+          handleOk={handleOk}
+          okLabel="Create Session"
+          centered
+          trigger={
+            <WButton
+              type="primary"
+              className="flex items-center justify-center gap-1 text-white"
+              icon={<AiOutlinePlus size={16} />}
+              size="large"
+            >
+              Create Session
+            </WButton>
+          }
+        >
+          <SessionModal />
+        </WModal>
       </div>
       <div className="w-full max-w-[1176px] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-[40px]">
-        {articles.map((item, index) => (
+        {sessions.map((item, index) => (
           <div key={index}>
-            <Article title={item.title} description={item.description} />
+            <Session title={item.title} description={item.description} />
           </div>
         ))}
       </div>
@@ -86,7 +95,7 @@ export default function page() {
   );
 }
 
-const Article = ({
+const Session = ({
   title,
   description,
 }: {

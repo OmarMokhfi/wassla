@@ -5,7 +5,6 @@ import { BsCloudUploadFill } from "react-icons/bs";
 import WButton from "src/components/Button";
 import WDragger from "src/components/Dragger";
 import WInput from "src/components/Input";
-import WTextArea from "src/components/TextArea";
 
 export default function page() {
   const onSubmit = (values: any) => {};
@@ -15,10 +14,26 @@ export default function page() {
   function onDrop(e: any) {
     console.log("Dropped files", e.dataTransfer.files);
   }
+
+  const execCommand = (cmd: string, value: string | null = null) => {
+    if (value) {
+      document.execCommand(cmd, false, value);
+    } else {
+      document.execCommand(cmd);
+    }
+  };
   return (
     <>
       <section className="py-2 w-full border-gray-600 flex justify-between items-center">
-        <div></div>
+        <div>
+          <WButton
+            type="default"
+            onClick={() => execCommand("bold")}
+            className="flex items-center justify-center gap-1"
+          >
+            Bold
+          </WButton>
+        </div>
         <div className="flex gap-x-4">
           <WButton
             type="default"
@@ -69,16 +84,13 @@ export default function page() {
           </WDragger>
         </div>
         <div className="mt-6">
-          <WTextArea
-            placeholder="Write here. you can also include #Hashtags"
+          <div
+            contentEditable
+            data-placeholder="Write here. you can also include #Hashtags"
             id="article"
-            required
-            autoSize={{ minRows: 4, maxRows: 20 }}
-            maxLength={1000}
-            className="w-full text-lg"
-            bordered={false}
+            className="w-full text-lg focus:border-transparent"
             style={{ padding: 0 }}
-          />
+          ></div>
         </div>
       </div>
     </>

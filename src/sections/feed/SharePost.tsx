@@ -27,8 +27,10 @@ export default function SharePost() {
         </div>
         <div className="space-y-2 flex-grow">
           <WModal
-            title="Create a New Post"
+            closable={false}
             handleOk={handleOk}
+            width="500px"
+            bodyStyle={{ padding: 0 }}
             okLabel="Post"
             trigger={
               <WButton
